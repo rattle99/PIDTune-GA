@@ -11,4 +11,13 @@ OpenLoop = series(G,controller);
 ClosedLoop = feedback(OpenLoop,1);
 step(ClosedLoop)
 
-[x,fval] = ga(@(K)itae(G,K),3);
+PopSize = 25;
+MaxGenerations = 10;
+options = optimoptions(@ga,'PopulationSize',PopSize,'MaxGenerations',MaxGenerations);
+[x,fval] = ga(@(K)itae(G,K),3,-eye(3),zeros(3,1),[],[],[],[],[],options);
+
+%%
+controller = pid(x(1), x(2), x(3));
+OpenLoop = series(G,controller);
+ClosedLoop = feedback(OpenLoop,1);
+step(ClosedLoop)

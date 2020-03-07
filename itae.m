@@ -2,7 +2,7 @@ function J = itae(G, K)
 %ITAE Calculates ITAE
 %   Detailed explanation goes here
     
-    dt = 0.1;
+    dt = 0.025;
     t = 0:dt:2;
     
     controller = pid(K(1), K(2), K(3));
